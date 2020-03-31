@@ -1,5 +1,8 @@
 package main.java;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class InfomobilityProvider {
     private String name;
     private String adapterRemoteURI;
@@ -27,5 +30,24 @@ public class InfomobilityProvider {
 
     public void setProviderType(ProviderType providerType) {
         this.providerType = providerType;
+    }
+    public ArrayList<Vehicle> getVehicles(ArrivalPoint arrivalPoint, StartingPoint startingPoint) throws IOException {
+        ArrayList<Vehicle> vehicles=new ArrayList<>();
+        switch (providerType){
+            case API:
+                //normalmente si farebbe una chiamata rest alla remote uri, qui la simuliamo con una classe
+                ApiRest apiRest=new ApiRest();
+                try {
+                    vehicles=apiRest.call(adapterRemoteURI, arrivalPoint,startingPoint);
+                }
+                catch (IOException exception){
+                    System.out.println(exception.getMessage());
+                }
+            case EMBEDDED_VIEW:
+                //
+            case REDIRECT_LINK:
+                //
+        }
+        return vehicles;
     }
 }

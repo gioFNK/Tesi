@@ -6,8 +6,24 @@ public class Vehicle {
     private int availableQuantity;
     private float hourCost;
     private String powerType;
-    private ArrivalPoint arrivalPoint;
+    private ArrivalPoint arrivalPoint;//da popolare nel caso dei bus, riguarda L'UML, non è obbligatorio, da far capire che ha senso
     public MobilityType type;
+
+    public ArrivalPoint getArrivalPoint() {
+        return arrivalPoint;
+    }
+
+    public void setArrivalPoint(ArrivalPoint arrivalPoint) {
+        this.arrivalPoint = arrivalPoint;
+    }
+
+    public MobilityType getType() {
+        return type;
+    }
+
+    public void setType(MobilityType type) {
+        this.type = type;
+    }
 
     public double getLon() {
         return lon;
