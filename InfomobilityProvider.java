@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class InfomobilityProvider {
     private String name;
-    private String adapterRemoteURI;
     private ProviderType providerType;
+    private Adapter adapter;
 
     public String getName() {
         return name;
@@ -16,14 +16,6 @@ public class InfomobilityProvider {
         this.name = name;
     }
 
-    public String getAdapterRemoteURI() {
-        return adapterRemoteURI;
-    }
-
-    public void setAdapterRemoteURI(String adapterRemoteURI) {
-        this.adapterRemoteURI = adapterRemoteURI;
-    }
-
     public ProviderType getProviderType() {
         return providerType;
     }
@@ -31,14 +23,23 @@ public class InfomobilityProvider {
     public void setProviderType(ProviderType providerType) {
         this.providerType = providerType;
     }
+
+    public Adapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(Adapter adapter) {
+        this.adapter = adapter;
+    }
+
     public ArrayList<Vehicle> getVehicles(ArrivalPoint arrivalPoint, StartingPoint startingPoint) throws IOException {
         ArrayList<Vehicle> vehicles=new ArrayList<>();
         switch (providerType){
             case API:
                 //normalmente si farebbe una chiamata rest alla remote uri, qui la simuliamo con una classe
-                ApiRest apiRest=new ApiRest();
+                ApiGateway apiGateway =new ApiGateway();
                 try {
-                    vehicles=apiRest.call(adapterRemoteURI, arrivalPoint,startingPoint);
+                    vehicles= apiGateway.invoke(this.adapter, arrivalPoint,startingPoint);
                 }
                 catch (IOException exception){
                     System.out.println(exception.getMessage());

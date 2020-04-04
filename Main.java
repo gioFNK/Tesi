@@ -7,13 +7,15 @@ public class Main {
         //Build Scenario
         ArrayList<InfomobilityProvider> infomobilityProviders=new ArrayList<>();
         InfomobilityProvider mobike= new InfomobilityProvider();
-        mobike.setAdapterRemoteURI("https://mymobikeadapter");//finta
+        MobikeAdapter mobikeAdapter = new MobikeAdapter();
         mobike.setName("Mobike");
         mobike.setProviderType(ProviderType.API);
+        mobike.setAdapter(mobikeAdapter);
         infomobilityProviders.add(mobike);
         InfomobilityProvider busAPI= new InfomobilityProvider();
-        busAPI.setAdapterRemoteURI("https://mybusapi");//finta
         busAPI.setName("busAPI");
+        SimulatedBusProviderAdapter busProviderAdapter=new SimulatedBusProviderAdapter();
+        busAPI.setAdapter(busProviderAdapter);
         busAPI.setProviderType(ProviderType.API);
         infomobilityProviders.add(busAPI);
         //
